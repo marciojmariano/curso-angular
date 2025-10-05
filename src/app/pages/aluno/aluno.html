@@ -1,3 +1,13 @@
 <h1>Dados Aluno</h1>
-<label for="nomeAluno"></label>
-<input id="nomeAluno" type="text">
+<label for="nome">Nome: </label>
+<input id="nome" type="text">
+<label for="dataNascimento">Data de Nascimento: </label>
+<input id="dataNascimento" type="date">
+<label for="peso">Peso: </label>
+<input id="peso" type="text">
+<label for="altura">Altura: </label>
+<input id="altura" type="text">
+<button (click)="calcularIMC()">Salvar</button>
+@if(imc != undefined){
+<p>IMC: {{imc}}</p>
+}

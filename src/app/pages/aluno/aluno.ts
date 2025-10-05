@@ -8,5 +8,14 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './aluno.scss'
 })
 export class Aluno {
+  nome: string = ""
+  // dataNascimento: date = ""
+  peso: number = 0.0
+  altura: number = 0.0
+  imc: number = 0.0
 
+
+calcularIMC(): void{
+  this.imc = this.peso / (this.altura * this.altura)
+}
 }

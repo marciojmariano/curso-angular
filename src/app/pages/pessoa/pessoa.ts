@@ -33,9 +33,6 @@ export class Pessoa {
     // let nomeCompleto: string = nome + " " + sobrenome;
     let nomeCompleto: string = this.nome + " " + this.sobrenome;
     this.nomeCompleto = nomeCompleto;
-
     this.anoNascimento = 2025 - this.idade
-
-
   }
 }
