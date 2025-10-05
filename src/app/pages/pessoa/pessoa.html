@@ -1,0 +1,20 @@
+<h2>{{titulo}}</h2>
+<button (click)="alterarTitulo()">Alterar título</button>
+
+<h2>Contador</h2>
+<button (click)="incrementar()">+</button>
+<p>Quantidade: {{quantidade}}</p>
+
+<h2>Exemplo de concatenação</h2>
+<div>
+    <label for="nome">Nome</label>
+    <input id="nome" type="text" [(ngModel)]="nome">
+    <label for="sobrenome">Sobrenome</label>
+    <input id="sobrenome" type="text" [(ngModel)]="sobrenome">
+    <label for="idade">Idade</label>
+    <input id="idade" type="number"[(ngModel)]="idade">
+    <button (click)="concatenar()">Concatenar String</button>
+    @if(nomeCompleto != undefined){
+        <p>Nome concatenado: {{nomeCompleto}} Nasceu em: {{anoNascimento}}</p>
+    }
+</div>
