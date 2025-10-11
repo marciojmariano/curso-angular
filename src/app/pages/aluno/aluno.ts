@@ -26,32 +26,32 @@ export class Aluno {
       const alturaValida = this.altura;
       this.imc = pesoValido / (alturaValida * alturaValida);
       this.mensagemIMC = "IMC:";
-    } else {
-      this.mensagemIMC = "Por favor, informe valores válidos para peso e altura!";
+      return;
+    }
+    this.mensagemIMC = "Por favor, informe valores válidos para peso e altura!";
+  }
+
+  verificarCategoriaImc(): void {
+    if (this.imc === null) {
+      return;
+    }
+    if (this.imc <= 0) {
+      this.categoriaImc = "Erro ao calcular a categoria do IMC.";
+    } 
+    else if (this.imc < 18.5) {
+      this.categoriaImc = " - Baixo peso";
+    } else if (this.imc <= 24.99) {
+      this.categoriaImc = " - Normal";
+    } else if (this.imc <= 29.99) {
+      this.categoriaImc = " - Sobrepeso";
+    } else if (this.imc <= 34.99) {
+      this.categoriaImc = " - Obesidade Grau I";
+    } else if (this.imc <= 39.99) {
+      this.categoriaImc = " - Obesidade Grau II";
+    } else if (this.imc >= 40.0) {
+      this.categoriaImc = " - Obesidade Grau III";
     }
   }
-
- verificarCategoriaImc(): void {
-  if (this.imc === null) {
-    return;
-  }
-
-  if (this.imc < 18.5) {
-    this.categoriaImc = " - Baixo peso";
-  } else if (this.imc >= 18.5 && this.imc <= 24.9) {
-    this.categoriaImc = " - Normal";
-  } else if (this.imc >= 25.0 && this.imc <= 29.9) {
-    this.categoriaImc = " - Sobrepeso";
-  } else if (this.imc >= 30.0 && this.imc <= 34.9) {
-    this.categoriaImc = " - Obesidade Grau I";
-  } else if (this.imc >= 35.0 && this.imc <= 39.9) {
-    this.categoriaImc = " - Obesidade Grau II";
-  } else if (this.imc >= 40.0) {
-    this.categoriaImc = " - Obesidade Grau III";
-  } else {
-    this.categoriaImc = "Erro ao calcular a categoria do IMC.";
-  }
-}
 
   onDataNascimentoChange(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -95,5 +95,11 @@ export class Aluno {
     } else {
       this.mensagemIdade = "Por favor, informe a data de nascimento!";
     }
+  }
+
+  processar(): void {
+    this.calcularIMC();
+    this.calcularIdade();
+    this.verificarCategoriaImc();
   }
 }

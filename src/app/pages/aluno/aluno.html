@@ -5,7 +5,7 @@
   <input id="nome" type="text" [(ngModel)]="nome">
 
   <label for="dataNascimento">Data de Nascimento:</label>
-  <input id="dataNascimento" type="date" (change)="onDataNascimentoChange($event)">
+  <input id="dataNascimento" type="date" (change)="onDataNascimentoChange($event)" [(ngModel)]="dataNascimento">
 
   <label for="peso">Peso (kg): </label>
   <input id="peso" type="number" [(ngModel)]="peso">
@@ -15,7 +15,7 @@
 
 
 
-  <button (click)="calcularIMC(); calcularIdade(); verificarCategoriaImc()">Salvar</button>
+  <button (click)="processar()">Salvar</button>
 
 
 
