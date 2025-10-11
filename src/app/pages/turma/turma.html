@@ -1,1 +1,37 @@
-<p>turma works!</p>
+<h1>Turmas</h1>
+<div>
+    <div>
+        <label for="nome">Nome: </label>
+        <input id="nome" type="text" [(ngModel)]="form.nome">
+        <label for="sigla">Sigla: </label>
+        <input id="Sigla" type="text" [(ngModel)]="form.sigla">
+        <button (click)="salvar()">Salvar</button>
+
+    </div>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Sigla</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(turma of turmas; track turma){
+
+                    <tr>
+                        <td>{{turma.id}}</td>
+                        <td>{{turma.nome}}</td>
+                        <td>{{turma.sigla}}</td>
+                        <td>
+                            <button (click)="preencherCamposParaEditar(turma)">Editar</button>
+                            <button (click)="apagar(turma)">Apagar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
