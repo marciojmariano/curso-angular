@@ -1,13 +1,34 @@
+<!-- src/app/aluno/aluno.html -->
 <h1>Dados Aluno</h1>
-<label for="nome">Nome: </label>
-<input id="nome" type="text">
-<label for="dataNascimento">Data de Nascimento: </label>
-<input id="dataNascimento" type="date">
-<label for="peso">Peso: </label>
-<input id="peso" type="text">
-<label for="altura">Altura: </label>
-<input id="altura" type="text">
-<button (click)="calcularIMC()">Salvar</button>
-@if(imc != undefined){
-<p>IMC: {{imc}}</p>
-}
+<div>
+  <label for="nome">Nome: </label>
+  <input id="nome" type="text" [(ngModel)]="nome">
+
+  <label for="dataNascimento">Data de Nascimento:</label>
+  <input id="dataNascimento" type="date" (change)="onDataNascimentoChange($event)">
+
+  <label for="peso">Peso (kg): </label>
+  <input id="peso" type="number" [(ngModel)]="peso">
+
+  <label for="altura">Altura (m): </label>
+  <input id="altura" type="number" [(ngModel)]="altura">
+
+
+
+  <button (click)="calcularIMC(); calcularIdade(); verificarCategoriaImc()">Salvar</button>
+
+
+
+  <p>{{nome}}</p>
+  <p>{{mensagemIdade}} {{idade}} {{mensagemAniversario}}</p>
+  <p>{{mensagemIMC}} {{ imc | number:'1.2-2' }} {{categoriaImc}}</p>
+  <!-- @if (imc !== null) {
+      <p>{{mensagemUsuario}} {{ imc | number:'1.2-2' }}</p>
+    } @else if (peso !== null && altura !== null && altura <= 0) {
+      <p>A altura deve ser maior que zero para calcular o IMC.</p>
+    } @else if (peso !== null || altura !== null) {
+      <p>Por favor, preencha peso e altura para calcular o IMC.</p>
+    } @else {
+      <p>Informe os dados para cálculo do IMC.</p>
+    } -->
+</div>
