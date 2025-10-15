@@ -1,0 +1,7 @@
+<div>
+    <label for="ingrediente">Ingrediente: </label>
+    <input id="ingrediente" type="text" [(ngModel)]="form.ingrediente">
+    <label for="quantidade">Quantidade (g): </label>
+    <input id="quantidade" type="number" [(ngModel)]="form.quantidade">
+    <button (click)="adicionarIngrediente()">Salvar</button>
+</div>
