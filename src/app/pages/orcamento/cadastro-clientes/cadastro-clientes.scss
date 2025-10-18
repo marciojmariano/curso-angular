@@ -1,52 +1,149 @@
-.form-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  background-color: #f9f9f9;
+/* Estilo geral para o container */
+div {
+  max-width: 600px; /* Reduz a largura máxima para ocupar menos espaço */
+  margin: 20px auto; /* Centraliza o conteúdo horizontalmente e adiciona margem superior */
+  padding: 1rem; /* Espaçamento interno */
+  font-family: 'Roboto', sans-serif; /* Fonte moderna e legível */
+  background-color: #ffffff; /* Fundo branco para maior contraste */
+  border: 1px solid #e0e0e0; /* Borda leve e discreta */
+  border-radius: 12px; /* Bordas mais arredondadas para um visual moderno */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para destaque */
+}
 
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
+/* Estilo para o título principal */
+h1 {
+  text-align: center; /* Centraliza o título */
+  color: #333333; /* Cor escura para contraste */
+  font-size: 1.5rem; /* Tamanho do texto ajustado */
+  margin-bottom: 1rem; /* Espaçamento abaixo do título */
+  font-weight: 600; /* Peso da fonte para destaque */
+}
+
+/* Estilo para o formulário */
+form {
+  display: flex;
+  flex-direction: column; /* Organiza os elementos na vertical */
+  gap: 0.75rem; /* Espaçamento reduzido entre os campos */
+}
+
+/* Estilo para os grupos de formulário */
+.form-group {
+  display: flex;
+  flex-direction: column; /* Organiza o label e o input na vertical */
+}
+
+/* Estilo para os labels */
+label {
+  font-weight: 500; /* Peso intermediário para o texto */
+  margin-bottom: 0.25rem; /* Espaçamento reduzido abaixo do label */
+  color: #555555; /* Cor suave para o texto */
+  font-size: 0.9rem; /* Tamanho menor para economizar espaço */
+}
+
+/* Estilo para os inputs e textarea */
+input,
+textarea {
+  padding: 0.5rem 0.75rem; /* Espaçamento interno ajustado */
+  border: 1px solid #cccccc; /* Borda leve */
+  border-radius: 8px; /* Bordas arredondadas */
+  font-size: 0.95rem; /* Tamanho da fonte ajustado */
+  width: 100%; /* Ocupa toda a largura disponível */
+  box-sizing: border-box; /* Inclui padding e border no tamanho total */
+  background-color: #f9f9f9; /* Fundo leve para destacar o campo */
+  transition: border-color 0.3s ease; /* Animação suave ao focar */
+}
+
+/* Estilo para os inputs ao receber foco */
+input:focus,
+textarea:focus {
+  border-color: #007bff; /* Destaque azul ao focar */
+  outline: none; /* Remove o contorno padrão */
+  background-color: #ffffff; /* Fundo branco ao focar */
+}
+
+/* Estilo para o botão */
+button {
+  padding: 0.6rem 1rem; /* Espaçamento interno ajustado */
+  background-color: #007bff; /* Cor de fundo azul */
+  color: white; /* Cor do texto */
+  border: none; /* Remove a borda */
+  border-radius: 8px; /* Bordas arredondadas */
+  font-size: 1rem; /* Tamanho da fonte */
+  font-weight: 500; /* Peso intermediário */
+  cursor: pointer; /* Mostra o cursor de clique */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Animação suave ao passar o mouse */
+}
+
+/* Estilo para o botão ao passar o mouse */
+button:hover {
+  background-color: #0056b3; /* Cor mais escura no hover */
+  transform: translateY(-2px); /* Efeito de elevação */
+}
+
+/* Estilo para mensagens de erro */
+small {
+  color: red; /* Cor vermelha para mensagens de erro */
+  font-size: 0.8rem; /* Tamanho menor */
+  margin-top: 0.25rem; /* Espaçamento acima da mensagem */
+}
+
+/* Estilo para a lista de clientes */
+h2 {
+  margin-top: 1.5rem; /* Espaçamento acima do título */
+  color: #333333; /* Cor escura para contraste */
+  font-size: 1.25rem; /* Tamanho ajustado */
+  text-align: center; /* Centraliza o título */
+  font-weight: 600; /* Peso da fonte */
+}
+
+ul {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0; /* Remove o espaçamento interno */
+  margin: 0; /* Remove margens */
+}
+
+li {
+  background-color: #f9f9f9; /* Fundo claro para os itens */
+  border: 1px solid #e0e0e0; /* Borda leve */
+  border-radius: 8px; /* Bordas arredondadas */
+  padding: 0.75rem; /* Espaçamento interno ajustado */
+  margin-bottom: 0.75rem; /* Espaçamento entre os itens */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra leve para destaque */
+  display: flex; /* Organiza o conteúdo em linha */
+  flex-direction: column; /* Organiza os textos na vertical */
+  gap: 0.5rem; /* Espaçamento entre os textos */
+}
+
+/* Estilo para os textos dentro da lista */
+li strong {
+  color: #007bff; /* Destaque azul para os títulos */
+  font-weight: 500; /* Peso intermediário */
+}
+
+p {
+  text-align: center; /* Centraliza o texto */
+  color: #777777; /* Cor suave */
+  font-size: 0.9rem; /* Tamanho menor */
+  margin-top: 1rem; /* Espaçamento acima */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  div {
+    max-width: 90%; /* Reduz a largura em telas pequenas */
+    padding: 1rem; /* Mantém o espaçamento interno */
   }
 
-  .form-group {
-    margin-bottom: 15px;
-
-    label {
-      display: block;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-
-    small {
-      color: red;
-      font-size: 12px;
-    }
+  h1 {
+    font-size: 1.25rem; /* Reduz o tamanho do título */
   }
 
   button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    font-size: 0.9rem; /* Reduz o tamanho do botão */
+    padding: 0.5rem 0.75rem; /* Ajusta o espaçamento interno */
+  }
 
-    &:disabled {
-      background-color: #ccc;
-      cursor: not-allowed;
-    }
+  li {
+    padding: 0.5rem; /* Reduz o espaçamento interno dos itens */
   }
 }
