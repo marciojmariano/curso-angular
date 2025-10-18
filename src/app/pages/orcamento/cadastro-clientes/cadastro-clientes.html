@@ -1,0 +1,62 @@
+<div class="form-container">
+  <h2>Cadastro de Cliente</h2>
+  <form [formGroup]="clienteForm" (ngSubmit)="salvarCliente()">
+    <!-- Nome -->
+    <div class="form-group">
+      <label for="nome">Nome:</label>
+      <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome completo" />
+      <small *ngIf="clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched">
+        O nome é obrigatório e deve ter pelo menos 3 caracteres.
+      </small>
+    </div>
+
+    <!-- Data de Nascimento -->
+    <div class="form-group">
+      <label for="dataNascimento">Data de Nascimento:</label>
+      <input id="dataNascimento" type="date" formControlName="dataNascimento" />
+      <small *ngIf="clienteForm.get('dataNascimento')?.invalid && clienteForm.get('dataNascimento')?.touched">
+        A data de nascimento é obrigatória.
+      </small>
+    </div>
+
+    <!-- WhatsApp/Celular -->
+    <div class="form-group">
+      <label for="celular">WhatsApp/Celular:</label>
+      <input id="celular" type="text" formControlName="celular" placeholder="(47) 99999-9999" />
+      <small *ngIf="clienteForm.get('celular')?.invalid && clienteForm.get('celular')?.touched">
+        O celular é obrigatório e deve estar no formato (47) 99999-9999.
+      </small>
+    </div>
+
+    <!-- E-mail -->
+    <div class="form-group">
+      <label for="email">E-mail:</label>
+      <input id="email" type="email" formControlName="email" placeholder="exemplo@email.com" />
+      <small *ngIf="clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched">
+        O e-mail é obrigatório e deve ser válido.
+      </small>
+    </div>
+
+    <!-- Endereço -->
+    <div class="form-group">
+      <label for="endereco">Endereço:</label>
+      <input id="endereco" type="text" formControlName="endereco" placeholder="Digite o endereço completo" />
+      <small *ngIf="clienteForm.get('endereco')?.invalid && clienteForm.get('endereco')?.touched">
+        O endereço é obrigatório.
+      </small>
+    </div>
+
+    <!-- Restrições Alimentares -->
+    <div class="form-group">
+      <label for="restricoesAlimentares">Restrições Alimentares:</label>
+      <textarea
+        id="restricoesAlimentares"
+        formControlName="restricoesAlimentares"
+        placeholder="Informe as restrições alimentares (se houver)"
+      ></textarea>
+    </div>
+
+    <!-- Botão Salvar -->
+    <button type="submit" [disabled]="clienteForm.invalid">Salvar</button>
+  </form>
+</div>
