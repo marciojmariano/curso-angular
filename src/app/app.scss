@@ -1,0 +1,67 @@
+/* Estilo para o cabeçalho principal */
+.cabecalho-principal {
+  background-color: #007bff; /* Cor de fundo do cabeçalho */
+  color: white; /* Cor do texto */
+  padding: 1rem; /* Espaçamento interno */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra para o cabeçalho */
+}
+
+/* Estilo para a navegação principal */
+.navegacao-principal {
+  display: flex; /* Organiza os itens na horizontal */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  align-items: center; /* Centraliza os itens verticalmente */
+}
+
+/* Estilo para a lista de navegação */
+.navegacao-principal ul {
+  list-style: none; /* Remove os marcadores da lista */
+  margin: 0; /* Remove margens */
+  padding: 0; /* Remove espaçamento interno */
+  display: flex; /* Exibe os itens na horizontal */
+  gap: 1.5rem; /* Espaçamento entre os itens */
+}
+
+/* Estilo para os itens da lista */
+.navegacao-principal li {
+  display: inline; /* Exibe os itens na horizontal */
+}
+
+/* Estilo para os links */
+.navegacao-principal a {
+  text-decoration: none; /* Remove o sublinhado dos links */
+  color: white; /* Cor do texto dos links */
+  font-weight: bold; /* Deixa o texto em negrito */
+  font-size: 1rem; /* Tamanho da fonte */
+  padding: 0.5rem 1rem; /* Espaçamento interno dos links */
+  border-radius: 5px; /* Bordas arredondadas */
+  transition: background-color 0.3s ease; /* Animação para hover */
+}
+
+/* Estilo para o hover dos links */
+.navegacao-principal a:hover {
+  background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+}
+
+/* Estilo para o conteúdo principal */
+.main {
+  padding: 2rem; /* Espaçamento interno para o conteúdo */
+  background-color: #f8f9fa; /* Cor de fundo do conteúdo */
+  min-height: calc(100vh - 80px); /* Garante que o conteúdo ocupe a altura restante da tela */
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 768px) {
+  .navegacao-principal {
+    flex-direction: column; /* Organiza os itens na vertical em telas pequenas */
+  }
+
+  .navegacao-principal ul {
+    gap: 1rem; /* Reduz o espaçamento entre os itens */
+  }
+
+  .navegacao-principal a {
+    font-size: 0.9rem; /* Reduz o tamanho da fonte */
+    padding: 0.5rem; /* Ajusta o espaçamento interno */
+  }
+}
