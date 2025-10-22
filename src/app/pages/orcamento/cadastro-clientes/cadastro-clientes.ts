@@ -29,7 +29,7 @@ export class CadastroClientes {
     this.consultarClientes(); // Carrega os clientes cadastrados
   }
 
-  salvarCliente() {
+  salvarCliente(): void {
     if (this.clienteForm.valid) {
       const clienteData = this.clienteForm.value;
       const clientesExistentes = JSON.parse(localStorage.getItem('clientes') || '[]');
@@ -43,8 +43,24 @@ export class CadastroClientes {
     }
   }
 
-  consultarClientes() {
+  private consultarClientes(): void {
     const clientesCadastrados = JSON.parse(localStorage.getItem('clientes') || '[]');
     this.clientes = clientesCadastrados;
   }
+deletarCliente(clienteId: string): void {
+  // Recupera a lista de clientes armazenados no localStorage
+  const clientesExistentes = JSON.parse(localStorage.getItem('clientes') || '[]');
+
+  // Filtra a lista, removendo o cliente com o ID correspondente
+  const clientesAtualizados = clientesExistentes.filter((cliente: any) => cliente.id !== clienteId);
+
+  // Atualiza o localStorage com a nova lista de clientes
+  localStorage.setItem('clientes', JSON.stringify(clientesAtualizados));
+
+  // // Atualiza a exibição dos clientes (se necessário)
+  // this.consultarClientes();
+
+  // alert('Cliente deletado com sucesso!');
+}
+
 }

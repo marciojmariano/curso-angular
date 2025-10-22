@@ -1,6 +1,6 @@
 /* Estilo geral para o container */
 div {
-  max-width: 600px; /* Reduz a largura máxima para ocupar menos espaço */
+  max-width: 800px; /* Reduz a largura máxima para ocupar menos espaço */
   margin: 20px auto; /* Centraliza o conteúdo horizontalmente e adiciona margem superior */
   padding: 1rem; /* Espaçamento interno */
   font-family: 'Roboto', sans-serif; /* Fonte moderna e legível */
@@ -87,37 +87,53 @@ small {
   margin-top: 0.25rem; /* Espaçamento acima da mensagem */
 }
 
-/* Estilo para a lista de clientes */
+/* Estilo para a tabela */
+.tabela-clientes {
+  width: 100%; /* Faz a tabela ocupar toda a largura disponível */
+  border-collapse: collapse; /* Remove espaços entre as bordas */
+  margin-top: 1rem; /* Espaçamento acima da tabela */
+  font-family: 'Roboto', sans-serif; /* Fonte consistente com o restante do layout */
+  font-size: 0.9rem; /* Ajusta o tamanho da fonte */
+  color: #333333; /* Cor do texto */
+}
+
+.tabela-clientes th,
+.tabela-clientes td {
+  border: 1px solid #ddd; /* Adiciona bordas às células */
+  padding: 0.75rem; /* Espaçamento interno das células */
+  text-align: left; /* Alinha o texto à esquerda */
+}
+
+.tabela-clientes th {
+  background-color: #f4f4f4; /* Fundo mais claro para o cabeçalho */
+  font-weight: bold; /* Deixa o texto do cabeçalho em negrito */
+  text-transform: uppercase; /* Coloca o texto em maiúsculas */
+}
+
+.tabela-clientes tr:nth-child(even) {
+  background-color: #f9f9f9; /* Fundo alternado para linhas pares */
+}
+
+.tabela-clientes tr:hover {
+  background-color: #f1f1f1; /* Destaque ao passar o mouse */
+}
+
+/* Responsividade para a tabela */
+@media (max-width: 768px) {
+  .tabela-clientes th,
+  .tabela-clientes td {
+    font-size: 0.8rem; /* Reduz o tamanho da fonte em telas menores */
+    padding: 0.5rem; /* Reduz o espaçamento interno */
+  }
+}
+
+/* Estilo para o título da tabela */
 h2 {
   margin-top: 1.5rem; /* Espaçamento acima do título */
   color: #333333; /* Cor escura para contraste */
   font-size: 1.25rem; /* Tamanho ajustado */
   text-align: center; /* Centraliza o título */
   font-weight: 600; /* Peso da fonte */
-}
-
-ul {
-  list-style: none; /* Remove os marcadores da lista */
-  padding: 0; /* Remove o espaçamento interno */
-  margin: 0; /* Remove margens */
-}
-
-li {
-  background-color: #f9f9f9; /* Fundo claro para os itens */
-  border: 1px solid #e0e0e0; /* Borda leve */
-  border-radius: 8px; /* Bordas arredondadas */
-  padding: 0.75rem; /* Espaçamento interno ajustado */
-  margin-bottom: 0.75rem; /* Espaçamento entre os itens */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Sombra leve para destaque */
-  display: flex; /* Organiza o conteúdo em linha */
-  flex-direction: column; /* Organiza os textos na vertical */
-  gap: 0.5rem; /* Espaçamento entre os textos */
-}
-
-/* Estilo para os textos dentro da lista */
-li strong {
-  color: #007bff; /* Destaque azul para os títulos */
-  font-weight: 500; /* Peso intermediário */
 }
 
 p {
@@ -141,9 +157,5 @@ p {
   button {
     font-size: 0.9rem; /* Reduz o tamanho do botão */
     padding: 0.5rem 0.75rem; /* Ajusta o espaçamento interno */
-  }
-
-  li {
-    padding: 0.5rem; /* Reduz o espaçamento interno dos itens */
   }
 }

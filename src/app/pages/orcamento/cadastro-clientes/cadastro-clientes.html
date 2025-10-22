@@ -33,32 +33,50 @@
 
     <div class="form-group">
       <label for="restricoesAlimentares">Restrições Alimentares:</label>
-      <textarea id="restricoesAlimentares" formControlName="restricoesAlimentares" placeholder="Digite as restrições alimentares"></textarea>
+      <textarea id="restricoesAlimentares" formControlName="restricoesAlimentares"
+        placeholder="Digite as restrições alimentares"></textarea>
     </div>
 
     <button type="submit" [disabled]="clienteForm.invalid">Salvar Cliente</button>
   </form>
-
+  <!-- <div *ngFor="let cliente of clientes">
+    <p>{{ cliente.nome }} - {{ cliente.email }}</p>
+    <button (click)="deletarCliente(cliente.id)">Deletar</button>
+  </div> -->
   <hr />
 
   <!-- Lista de clientes cadastrados -->
   <h2>Clientes Cadastrados</h2>
-  <div *ngIf="clientes.length > 0; else semClientes">
-    <ul>
-      <li *ngFor="let cliente of clientes">
-        <strong>Nome:</strong> {{ cliente.nome }}<br />
-        <strong>Data de Nascimento:</strong> {{ cliente.dataNascimento }}<br />
-        <strong>Celular:</strong> {{ cliente.celular }}<br />
-        <strong>E-mail:</strong> {{ cliente.email }}<br />
-        <strong>Endereço:</strong> {{ cliente.endereco }}<br />
-        <strong>Restrições Alimentares:</strong> {{ cliente.restricoesAlimentares || 'Nenhuma' }}
-        <hr />
-      </li>
-    </ul>
+  <!-- <div *ngIf="clientes.length > 0; else semClientes"> -->
+  <div>
+    @if(clientes.length === 0){
+    <p>Nenhum cliente cadastrado...</p>}
+    <table class="tabela-clientes">
+      <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Data de Nascimento</th>
+          <th>Celular</th>
+          <th>E-mail</th>
+          <th>Endereço</th>
+          <th>Restrições Alimentares</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.nome }}</td>
+          <td>{{ cliente.dataNascimento }}</td>
+          <td>{{ cliente.celular }}</td>
+          <td>{{ cliente.email }}</td>
+          <td>{{ cliente.endereco }}</td>
+          <td>{{ cliente.restricoesAlimentares || 'Nenhuma' }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- Caso não haja clientes cadastrados -->
+  <!-- Caso não haja clientes cadastrados
   <ng-template #semClientes>
     <p>Nenhum cliente cadastrado.</p>
-  </ng-template>
+  </ng-template> -->
 </div>
