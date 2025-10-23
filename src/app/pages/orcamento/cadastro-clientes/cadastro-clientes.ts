@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ConsultaClientes } from '../consulta-clientes/consulta-clientes';
 
 @Component({
   selector: 'app-cadastro-clientes',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, ConsultaClientes], //importado o componente filho ConsultaClientes
   templateUrl: './cadastro-clientes.html',
   styleUrls: ['./cadastro-clientes.scss']
 })
@@ -21,17 +22,17 @@ export class CadastroClientes {
       celular: ['', [Validators.required, Validators.pattern(/^(\(\d{2}\) \d{5}-\d{4})$/)]],
       email: ['', [Validators.required, Validators.email]],
       endereco: ['', Validators.required],
-      possuiRestricaoAlimentar: [false], // Campo booleano para indicar restrição alimentar
-      restricoesAlimentares: [{ value: '', disabled: true }] // Campo desabilitado por padrão
+      possuiRestricaoAlimentar: [false],
+      restricoesAlimentares: [{ value: '', disabled: true }]
     });
 
-    // Observa mudanças no campo "possuiRestricaoAlimentar" para habilitar/desabilitar o campo de restrições
+    // Observa mudanças no campo "possuiRestricaoAlimentar"
     this.clienteForm.get('possuiRestricaoAlimentar')?.valueChanges.subscribe((possuiRestricao) => {
       const restricoesControl = this.clienteForm.get('restricoesAlimentares');
       if (possuiRestricao) {
-        restricoesControl?.enable(); // Habilita o campo
+        restricoesControl?.enable();
       } else {
-        restricoesControl?.disable(); // Desabilita o campo e limpa o valor
+        restricoesControl?.disable();
         restricoesControl?.reset();
       }
     });
@@ -43,8 +44,8 @@ export class CadastroClientes {
 
   salvarCliente(): void {
     if (this.clienteForm.valid) {
-      const clienteData = this.clienteForm.getRawValue(); // Obtém todos os valores, incluindo campos desabilitados
-      const clientesExistentes = JSON.parse(localStorage.getItem('clientes') || '[]');
+      const clienteData = this.clienteForm.getRawValue();
+      const clientesExistentes = this.obterClientesDoLocalStorage(); // Usa o método reutilizável
       clientesExistentes.push(clienteData);
       localStorage.setItem('clientes', JSON.stringify(clientesExistentes));
       this.consultarClientes();
@@ -56,14 +57,21 @@ export class CadastroClientes {
   }
 
   deletarCliente(index: number): void {
-    this.clientes.splice(index, 1);
-    localStorage.setItem('clientes', JSON.stringify(this.clientes));
+    const clientesExistentes = this.obterClientesDoLocalStorage(); // Usa o método reutilizável
+    clientesExistentes.splice(index, 1);
+    localStorage.setItem('clientes', JSON.stringify(clientesExistentes));
     this.consultarClientes();
     alert('Cliente deletado com sucesso!');
   }
 
   private consultarClientes(): void {
-    const clientesCadastrados = JSON.parse(localStorage.getItem('clientes') || '[]');
-    this.clientes = clientesCadastrados;
+    this.clientes = this.obterClientesDoLocalStorage(); // Usa o método reutilizável
+  }
+
+  /**
+   * Método reutilizável para obter a lista de clientes do Local Storage
+   */
+  private obterClientesDoLocalStorage(): any[] {
+    return JSON.parse(localStorage.getItem('clientes') || '[]');
   }
 }
