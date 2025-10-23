@@ -12,6 +12,7 @@
       </small>
       }
     </div>
+
     <div class="form-group">
       <label for="dataNascimento">Data de Nascimento:</label>
       <input id="dataNascimento" type="date" formControlName="dataNascimento" />
@@ -33,9 +34,20 @@
     </div>
 
     <div class="form-group">
+      <label>
+        <input type="checkbox" formControlName="possuiRestricaoAlimentar" />
+        Possui restrições alimentares?
+      </label>
+    </div>
+
+    <div class="form-group">
       <label for="restricoesAlimentares">Restrições Alimentares:</label>
-      <textarea id="restricoesAlimentares" formControlName="restricoesAlimentares"
-        placeholder="Digite as restrições alimentares"></textarea>
+      <textarea
+        id="restricoesAlimentares"
+        formControlName="restricoesAlimentares"
+        placeholder="Digite as restrições alimentares"
+        [disabled]="!clienteForm.get('possuiRestricaoAlimentar')?.value">
+      </textarea>
     </div>
 
     <button type="submit" [disabled]="clienteForm.invalid">Salvar Cliente</button>
@@ -54,12 +66,11 @@
           <th>E-mail</th>
           <th>Endereço</th>
           <th>Restrições Alimentares</th>
-          <th>Ações</th> <!-- Coluna para ações -->
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody>
-        <tr> 
-        @for (cliente of clientes; track $index) {
+        <tr *ngFor="let cliente of clientes; let i = index">
           <td>{{ cliente.nome }}</td>
           <td>{{ cliente.dataNascimento }}</td>
           <td>{{ cliente.celular }}</td>
@@ -67,8 +78,8 @@
           <td>{{ cliente.endereco }}</td>
           <td>{{ cliente.restricoesAlimentares || 'Nenhuma' }}</td>
           <td>
-            <button (click)="deletarCliente($index)">Deletar</button> <!-- Botão para deletar -->
-          </td>}
+            <button (click)="deletarCliente(i)">Deletar</button>
+          </td>
         </tr>
       </tbody>
     </table>

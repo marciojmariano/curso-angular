@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-cadastro-clientes',
-  standalone: true, // Define que este é um Standalone Component
-  imports: [CommonModule, ReactiveFormsModule], // Importa ReactiveFormsModule aqui
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './cadastro-clientes.html',
   styleUrls: ['./cadastro-clientes.scss']
 })
@@ -21,7 +21,19 @@ export class CadastroClientes {
       celular: ['', [Validators.required, Validators.pattern(/^(\(\d{2}\) \d{5}-\d{4})$/)]],
       email: ['', [Validators.required, Validators.email]],
       endereco: ['', Validators.required],
-      restricoesAlimentares: ['']
+      possuiRestricaoAlimentar: [false], // Campo booleano para indicar restrição alimentar
+      restricoesAlimentares: [{ value: '', disabled: true }] // Campo desabilitado por padrão
+    });
+
+    // Observa mudanças no campo "possuiRestricaoAlimentar" para habilitar/desabilitar o campo de restrições
+    this.clienteForm.get('possuiRestricaoAlimentar')?.valueChanges.subscribe((possuiRestricao) => {
+      const restricoesControl = this.clienteForm.get('restricoesAlimentares');
+      if (possuiRestricao) {
+        restricoesControl?.enable(); // Habilita o campo
+      } else {
+        restricoesControl?.disable(); // Desabilita o campo e limpa o valor
+        restricoesControl?.reset();
+      }
     });
   }
 
@@ -31,7 +43,7 @@ export class CadastroClientes {
 
   salvarCliente(): void {
     if (this.clienteForm.valid) {
-      const clienteData = this.clienteForm.value;
+      const clienteData = this.clienteForm.getRawValue(); // Obtém todos os valores, incluindo campos desabilitados
       const clientesExistentes = JSON.parse(localStorage.getItem('clientes') || '[]');
       clientesExistentes.push(clienteData);
       localStorage.setItem('clientes', JSON.stringify(clientesExistentes));
@@ -44,15 +56,9 @@ export class CadastroClientes {
   }
 
   deletarCliente(index: number): void {
-    // Remove o cliente da lista com base no índice
     this.clientes.splice(index, 1);
-
-    // Atualiza o Local Storage
     localStorage.setItem('clientes', JSON.stringify(this.clientes));
-
-    // Atualiza a exibição
     this.consultarClientes();
-
     alert('Cliente deletado com sucesso!');
   }
 
