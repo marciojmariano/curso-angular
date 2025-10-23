@@ -1,161 +1,82 @@
-/* Estilo geral para o container */
-div {
-  max-width: 900px; /* Reduz a largura máxima para ocupar menos espaço */
-  margin: 20px auto; /* Centraliza o conteúdo horizontalmente e adiciona margem superior */
-  padding: 1rem; /* Espaçamento interno */
-  font-family: 'Roboto', sans-serif; /* Fonte moderna e legível */
-  background-color: #ffffff; /* Fundo branco para maior contraste */
-  border: 1px solid #e0e0e0; /* Borda leve e discreta */
-  border-radius: 12px; /* Bordas mais arredondadas para um visual moderno */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para destaque */
-}
+// src/app/orcamento/cadastro-cliente/cadastro-cliente.component.scss
 
-/* Estilo para o título principal */
-h1 {
-  text-align: center; /* Centraliza o título */
-  color: #333333; /* Cor escura para contraste */
-  font-size: 1.5rem; /* Tamanho do texto ajustado */
-  margin-bottom: 1rem; /* Espaçamento abaixo do título */
-  font-weight: 600; /* Peso da fonte para destaque */
-}
+@import '../../../../shared-styles.scss'; // Ajuste o caminho conforme a estrutura do seu projeto
 
-/* Estilo para o formulário */
+
+/* Estilos específicos do formulário de cadastro */
 form {
   display: flex;
-  flex-direction: column; /* Organiza os elementos na vertical */
-  gap: 0.75rem; /* Espaçamento reduzido entre os campos */
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-/* Estilo para os grupos de formulário */
 .form-group {
+  flex: 1 1 calc(50% - 0.5rem); /* Por padrão, tenta ocupar 50% da largura */
   display: flex;
-  flex-direction: column; /* Organiza o label e o input na vertical */
+  flex-direction: column;
+  margin-top: 1px;
+  margin-bottom: 1px;
 }
 
-/* Estilo para os labels */
+/* Campos específicos que devem ocupar a largura total (100%) */
+/* Adicionamos o campo 'nome' a esta lista */
+.form-group:has(#nome), /* NOVO: Campo Nome agora ocupa 100% */
+.form-group:has(#endereco),
+.form-group:has(input[type="checkbox"][formControlName="possuiRestricaoAlimentar"]),
+.form-group:has(#restricoesAlimentares) {
+  flex: 1 1 100%; /* Ocupa a largura total */
+}
+
+.form-group:has(input[type="checkbox"][formControlName="possuiRestricaoAlimentar"]) label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+}
+
+.form-group:has(input[type="checkbox"][formControlName="possuiRestricaoAlimentar"]) input[type="checkbox"] {
+  width: auto;
+  margin-bottom: 0;
+}
+
+form button[type="submit"] {
+  flex: 1 1 100%;
+  margin-top: 1rem;
+}
+
 label {
-  font-weight: 500; /* Peso intermediário para o texto */
-  margin-bottom: 0.25rem; /* Espaçamento reduzido abaixo do label */
-  color: #555555; /* Cor suave para o texto */
-  font-size: 0.9rem; /* Tamanho menor para economizar espaço */
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: #555555;
+  font-size: 0.9rem;
 }
 
-/* Estilo para os inputs e textarea */
 input,
 textarea {
-  padding: 0.5rem 0.75rem; /* Espaçamento interno ajustado */
-  border: 1px solid #cccccc; /* Borda leve */
-  border-radius: 8px; /* Bordas arredondadas */
-  font-size: 0.95rem; /* Tamanho da fonte ajustado */
-  width: 100%; /* Ocupa toda a largura disponível */
-  box-sizing: border-box; /* Inclui padding e border no tamanho total */
-  background-color: #f9f9f9; /* Fundo leve para destacar o campo */
-  transition: border-color 0.3s ease; /* Animação suave ao focar */
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cccccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
 }
 
-/* Estilo para os inputs ao receber foco */
 input:focus,
 textarea:focus {
-  border-color: #007bff; /* Destaque azul ao focar */
-  outline: none; /* Remove o contorno padrão */
-  background-color: #ffffff; /* Fundo branco ao focar */
+  border-color: #007bff;
+  outline: none;
+  background-color: #ffffff;
 }
 
-/* Estilo para o botão */
-button {
-  padding: 0.6rem 1rem; /* Espaçamento interno ajustado */
-  background-color: #007bff; /* Cor de fundo azul */
-  color: white; /* Cor do texto */
-  border: none; /* Remove a borda */
-  border-radius: 8px; /* Bordas arredondadas */
-  font-size: 1rem; /* Tamanho da fonte */
-  font-weight: 500; /* Peso intermediário */
-  cursor: pointer; /* Mostra o cursor de clique */
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Animação suave ao passar o mouse */
-}
-
-/* Estilo para o botão ao passar o mouse */
-button:hover {
-  background-color: #0056b3; /* Cor mais escura no hover */
-  transform: translateY(-2px); /* Efeito de elevação */
-}
-
-/* Estilo para mensagens de erro */
-small {
-  color: red; /* Cor vermelha para mensagens de erro */
-  font-size: 0.8rem; /* Tamanho menor */
-  margin-top: 0.25rem; /* Espaçamento acima da mensagem */
-}
-
-/* Estilo para a tabela */
-.tabela-clientes {
-  width: 100%; /* Faz a tabela ocupar toda a largura disponível */
-  border-collapse: collapse; /* Remove espaços entre as bordas */
-  margin-top: 1rem; /* Espaçamento acima da tabela */
-  font-family: 'Roboto', sans-serif; /* Fonte consistente com o restante do layout */
-  font-size: 0.9rem; /* Ajusta o tamanho da fonte */
-  color: #333333; /* Cor do texto */
-}
-
-.tabela-clientes th,
-.tabela-clientes td {
-  border: 1px solid #ddd; /* Adiciona bordas às células */
-  padding: 0.75rem; /* Espaçamento interno das células */
-  text-align: left; /* Alinha o texto à esquerda */
-}
-
-.tabela-clientes th {
-  background-color: #f4f4f4; /* Fundo mais claro para o cabeçalho */
-  font-weight: bold; /* Deixa o texto do cabeçalho em negrito */
-  text-transform: uppercase; /* Coloca o texto em maiúsculas */
-}
-
-.tabela-clientes tr:nth-child(even) {
-  background-color: #f9f9f9; /* Fundo alternado para linhas pares */
-}
-
-.tabela-clientes tr:hover {
-  background-color: #f1f1f1; /* Destaque ao passar o mouse */
-}
-
-/* Responsividade para a tabela */
+/* Responsividade específica do formulário */
 @media (max-width: 768px) {
-  .tabela-clientes th,
-  .tabela-clientes td {
-    font-size: 0.8rem; /* Reduz o tamanho da fonte em telas menores */
-    padding: 0.5rem; /* Reduz o espaçamento interno */
-  }
-}
-
-/* Estilo para o título da tabela */
-h2 {
-  margin-top: 1.5rem; /* Espaçamento acima do título */
-  color: #333333; /* Cor escura para contraste */
-  font-size: 1.25rem; /* Tamanho ajustado */
-  text-align: center; /* Centraliza o título */
-  font-weight: 600; /* Peso da fonte */
-}
-
-p {
-  text-align: center; /* Centraliza o texto */
-  color: #777777; /* Cor suave */
-  font-size: 0.9rem; /* Tamanho menor */
-  margin-top: 1rem; /* Espaçamento acima */
-}
-
-/* Responsividade para telas menores */
-@media (max-width: 768px) {
-  div {
-    max-width: 90%; /* Reduz a largura em telas pequenas */
-    padding: 1rem; /* Mantém o espaçamento interno */
+  .form-group {
+    flex: 1 1 100%; /* Em telas pequenas, todos os campos voltam a ocupar 100% */
   }
 
-  h1 {
-    font-size: 1.25rem; /* Reduz o tamanho do título */
-  }
-
-  button {
-    font-size: 0.9rem; /* Reduz o tamanho do botão */
-    padding: 0.5rem 0.75rem; /* Ajusta o espaçamento interno */
+  .form-group:has(input[type="checkbox"][formControlName="possuiRestricaoAlimentar"]) label {
+    justify-content: flex-start;
   }
 }

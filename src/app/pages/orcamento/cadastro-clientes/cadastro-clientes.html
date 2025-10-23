@@ -1,6 +1,4 @@
-<!-- Adicionado o seletor do componente filho -->
-<app-consulta-clientes></app-consulta-clientes>
-
+<!-- src/app/orcamento/cadastro-cliente/cadastro-cliente.component.html -->
 <div>
   <h1>Cadastro de Clientes</h1>
 
@@ -10,9 +8,12 @@
       <label for="nome">Nome:</label>
       <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome completo" />
       @if (clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched) {
-      <small>
-        O nome é obrigatório e deve ter pelo menos 3 caracteres.
-      </small>
+        @if (clienteForm.get('nome')?.errors?.['required']) {
+          <small>O nome é obrigatório.</small>
+        }
+        @if (clienteForm.get('nome')?.errors?.['minlength']) {
+          <small>O nome deve ter pelo menos 3 caracteres.</small>
+        }
       }
     </div>
 
@@ -24,11 +25,25 @@
     <div class="form-group">
       <label for="celular">Celular:</label>
       <input id="celular" type="text" formControlName="celular" placeholder="(XX) XXXXX-XXXX" />
+      <!-- Mensagens de validação para o campo celular -->
+      @if (clienteForm.get('celular')?.invalid && clienteForm.get('celular')?.touched) {
+      @if (clienteForm.get('celular')?.errors?.['required']) {
+      <small>O celular é obrigatório.</small>
+      }
+      @if (clienteForm.get('celular')?.errors?.['pattern']) {
+      <small>Formato de celular inválido. Use (XX) XXXXX-XXXX.</small>
+      }
+      }
     </div>
 
     <div class="form-group">
       <label for="email">E-mail:</label>
       <input id="email" type="email" formControlName="email" placeholder="Digite o e-mail" />
+      @if (clienteForm.get('email')?.invalid && clienteForm.get('email')?.touched) {
+      @if (clienteForm.get('email')?.errors?.['email']) {
+      <small>E-mail inválido.</small>
+      }
+      }
     </div>
 
     <div class="form-group">
@@ -45,11 +60,8 @@
 
     <div class="form-group">
       <label for="restricoesAlimentares">Restrições Alimentares:</label>
-      <textarea
-        id="restricoesAlimentares"
-        formControlName="restricoesAlimentares"
-        placeholder="Digite as restrições alimentares"
-        [disabled]="!clienteForm.get('possuiRestricaoAlimentar')?.value">
+      <textarea id="restricoesAlimentares" formControlName="restricoesAlimentares"
+        placeholder="Digite as restrições alimentares" [disabled]="!clienteForm.get('possuiRestricaoAlimentar')?.value">
       </textarea>
     </div>
 
@@ -57,36 +69,9 @@
   </form>
   <hr />
 
-  <!-- Lista de clientes cadastrados -->
-  <h2>Clientes Cadastrados</h2>
-  @if(clientes.length > 0){ 
-    <table class="tabela-clientes">
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Data de Nascimento</th>
-          <th>Celular</th>
-          <th>E-mail</th>
-          <th>Endereço</th>
-          <th>Restrições Alimentares</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cliente of clientes; let i = index">
-          <td>{{ cliente.nome }}</td>
-          <td>{{ cliente.dataNascimento }}</td>
-          <td>{{ cliente.celular }}</td>
-          <td>{{ cliente.email }}</td>
-          <td>{{ cliente.endereco }}</td>
-          <td>{{ cliente.restricoesAlimentares || 'Nenhuma' }}</td>
-          <td>
-            <button (click)="deletarCliente(i)">Deletar</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  } @else{
-    <p>Nenhum cliente cadastrado.</p>
-  }
+  <!-- Aqui é onde o componente filho é utilizado -->
+  <!-- [clientes]="clientes" passa a lista de clientes do pai para o filho via @Input -->
+  <!-- (clienteDeletado)="handleClienteDeletado($event)" ouve o evento do filho via @Output -->
+  <app-consulta-clientes [clientes]="clientes" (clienteDeletado)="handleClienteDeletado($event)">
+  </app-consulta-clientes>
 </div>
