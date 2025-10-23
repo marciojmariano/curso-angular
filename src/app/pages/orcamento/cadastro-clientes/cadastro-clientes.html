@@ -6,11 +6,12 @@
     <div class="form-group">
       <label for="nome">Nome:</label>
       <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome completo" />
-      <small *ngIf="clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched">
+      @if (clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched) {
+      <small>
         O nome é obrigatório e deve ter pelo menos 3 caracteres.
       </small>
+      }
     </div>
-
     <div class="form-group">
       <label for="dataNascimento">Data de Nascimento:</label>
       <input id="dataNascimento" type="date" formControlName="dataNascimento" />
@@ -39,18 +40,11 @@
 
     <button type="submit" [disabled]="clienteForm.invalid">Salvar Cliente</button>
   </form>
-  <!-- <div *ngFor="let cliente of clientes">
-    <p>{{ cliente.nome }} - {{ cliente.email }}</p>
-    <button (click)="deletarCliente(cliente.id)">Deletar</button>
-  </div> -->
   <hr />
 
   <!-- Lista de clientes cadastrados -->
   <h2>Clientes Cadastrados</h2>
-  <!-- <div *ngIf="clientes.length > 0; else semClientes"> -->
-  <div>
-    @if(clientes.length === 0){
-    <p>Nenhum cliente cadastrado...</p>}
+  @if(clientes.length > 0){ 
     <table class="tabela-clientes">
       <thead>
         <tr>
@@ -60,23 +54,25 @@
           <th>E-mail</th>
           <th>Endereço</th>
           <th>Restrições Alimentares</th>
+          <th>Ações</th> <!-- Coluna para ações -->
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let cliente of clientes">
+        <tr> 
+        @for (cliente of clientes; track $index) {
           <td>{{ cliente.nome }}</td>
           <td>{{ cliente.dataNascimento }}</td>
           <td>{{ cliente.celular }}</td>
           <td>{{ cliente.email }}</td>
           <td>{{ cliente.endereco }}</td>
           <td>{{ cliente.restricoesAlimentares || 'Nenhuma' }}</td>
+          <td>
+            <button (click)="deletarCliente($index)">Deletar</button> <!-- Botão para deletar -->
+          </td>}
         </tr>
       </tbody>
     </table>
-  </div>
-
-  <!-- Caso não haja clientes cadastrados
-  <ng-template #semClientes>
+  } @else{
     <p>Nenhum cliente cadastrado.</p>
-  </ng-template> -->
+  }
 </div>

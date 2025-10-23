@@ -43,24 +43,21 @@ export class CadastroClientes {
     }
   }
 
+  deletarCliente(index: number): void {
+    // Remove o cliente da lista com base no índice
+    this.clientes.splice(index, 1);
+
+    // Atualiza o Local Storage
+    localStorage.setItem('clientes', JSON.stringify(this.clientes));
+
+    // Atualiza a exibição
+    this.consultarClientes();
+
+    alert('Cliente deletado com sucesso!');
+  }
+
   private consultarClientes(): void {
     const clientesCadastrados = JSON.parse(localStorage.getItem('clientes') || '[]');
     this.clientes = clientesCadastrados;
   }
-deletarCliente(clienteId: string): void {
-  // Recupera a lista de clientes armazenados no localStorage
-  const clientesExistentes = JSON.parse(localStorage.getItem('clientes') || '[]');
-
-  // Filtra a lista, removendo o cliente com o ID correspondente
-  const clientesAtualizados = clientesExistentes.filter((cliente: any) => cliente.id !== clienteId);
-
-  // Atualiza o localStorage com a nova lista de clientes
-  localStorage.setItem('clientes', JSON.stringify(clientesAtualizados));
-
-  // // Atualiza a exibição dos clientes (se necessário)
-  // this.consultarClientes();
-
-  // alert('Cliente deletado com sucesso!');
-}
-
 }
