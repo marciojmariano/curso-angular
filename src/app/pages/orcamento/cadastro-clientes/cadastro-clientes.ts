@@ -1,23 +1,21 @@
-// src/app/orcamento/cadastro-cliente/cadastro-cliente.component.ts
-import { Component, OnInit } from '@angular/core'; // Adicionado OnInit
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-// Importa o componente filho ConsultaClientes
 import { ConsultaClientes } from '../consulta-clientes/consulta-clientes'; // Ajuste o caminho conforme sua estrutura de pastas
 
 @Component({
   selector: 'app-cadastro-clientes',
   standalone: true,
-  // Importa o ReactiveFormsModule, CommonModule e o componente filho
   imports: [CommonModule, ReactiveFormsModule, ConsultaClientes],
   templateUrl: './cadastro-clientes.html',
   styleUrls: ['./cadastro-clientes.scss']
 })
-export class CadastroClientes implements OnInit { // Implementa OnInit
+export class CadastroClientes implements OnInit {
   clienteForm: FormGroup;
-  clientes: any[] = []; // Lista de clientes cadastrados, gerenciada pelo pai
+  clientes: any[] = []; // Lista de clientes cadastrados
 
   constructor(private fb: FormBuilder) {
+    // Inicializa o formulário no constructor
     this.clienteForm = this.fb.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
       dataNascimento: ['', Validators.required],
@@ -27,7 +25,13 @@ export class CadastroClientes implements OnInit { // Implementa OnInit
       possuiRestricaoAlimentar: [false],
       restricoesAlimentares: [{ value: '', disabled: true }]
     });
+  }
 
+  ngOnInit(): void {
+    // Carrega os clientes cadastrados ao iniciar o componente
+    this.consultarClientes();
+
+    // Configura o comportamento dinâmico do campo de restrições alimentares
     this.clienteForm.get('possuiRestricaoAlimentar')?.valueChanges.subscribe((possuiRestricao) => {
       const restricoesControl = this.clienteForm.get('restricoesAlimentares');
       if (possuiRestricao) {
@@ -39,27 +43,10 @@ export class CadastroClientes implements OnInit { // Implementa OnInit
     });
   }
 
-  ngOnInit(): void {
-    this.consultarClientes(); // Carrega os clientes cadastrados ao iniciar o componente
-    // Definimos a regex para o formato (XX) XXXXX-XXXX
-    const celularRegex = /^\(\d{2}\)\s\d{5}-\d{4}$/;
-
-    this.clienteForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(3)]],
-      dataNascimento: [''],
-      // Adicionamos Validators.required e Validators.pattern com a nossa regex
-      celular: ['', [Validators.required, Validators.pattern(celularRegex)]],
-      email: ['', [Validators.email]], // Exemplo de outro validador embutido
-      endereco: [''],
-      possuiRestricaoAlimentar: [false],
-      restricoesAlimentares: [{ value: '', disabled: true }]
-    });
-
-  }
-
   salvarCliente(): void {
     if (this.clienteForm.valid) {
       const clienteData = this.clienteForm.getRawValue();
+      clienteData.dataNascimento = new Date(clienteData.dataNascimento); // Converte para Date
       const clientesExistentes = this.obterClientesDoLocalStorage();
       clientesExistentes.push(clienteData);
       localStorage.setItem('clientes', JSON.stringify(clientesExistentes));
@@ -75,7 +62,6 @@ export class CadastroClientes implements OnInit { // Implementa OnInit
     }
   }
 
-  // Novo método para lidar com o evento de deleção vindo do componente filho
   handleClienteDeletado(index: number): void {
     const clientesExistentes = this.obterClientesDoLocalStorage();
     clientesExistentes.splice(index, 1);
@@ -88,9 +74,6 @@ export class CadastroClientes implements OnInit { // Implementa OnInit
     this.clientes = this.obterClientesDoLocalStorage();
   }
 
-  /**
-   * Método reutilizável para obter a lista de clientes do Local Storage
-   */
   private obterClientesDoLocalStorage(): any[] {
     return JSON.parse(localStorage.getItem('clientes') || '[]');
   }

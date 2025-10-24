@@ -8,12 +8,12 @@
       <label for="nome">Nome:</label>
       <input id="nome" type="text" formControlName="nome" placeholder="Digite o nome completo" />
       @if (clienteForm.get('nome')?.invalid && clienteForm.get('nome')?.touched) {
-        @if (clienteForm.get('nome')?.errors?.['required']) {
-          <small>O nome é obrigatório.</small>
-        }
-        @if (clienteForm.get('nome')?.errors?.['minlength']) {
-          <small>O nome deve ter pelo menos 3 caracteres.</small>
-        }
+      @if (clienteForm.get('nome')?.errors?.['required']) {
+      <small>O nome é obrigatório.</small>
+      }
+      @if (clienteForm.get('nome')?.errors?.['minlength']) {
+      <small>O nome deve ter pelo menos 3 caracteres.</small>
+      }
       }
     </div>
 
@@ -61,9 +61,11 @@
     <div class="form-group">
       <label for="restricoesAlimentares">Restrições Alimentares:</label>
       <textarea id="restricoesAlimentares" formControlName="restricoesAlimentares"
-        placeholder="Digite as restrições alimentares" [disabled]="!clienteForm.get('possuiRestricaoAlimentar')?.value">
+        placeholder="Digite as restrições alimentares">
       </textarea>
     </div>
+    <!-- Teste para identificar a renderização -->
+    <!-- <pre>{{ clienteForm.value | json }}</pre> -->
 
     <button type="submit" [disabled]="clienteForm.invalid">Salvar Cliente</button>
   </form>

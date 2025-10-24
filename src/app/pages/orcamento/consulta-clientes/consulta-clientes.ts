@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common'; // Importar CommonModule para *n
 @Component({
   selector: 'app-consulta-clientes',
   standalone: true,
-  imports: [CommonModule], // Adicione CommonModule aqui
+  imports: [CommonModule], 
   templateUrl: './consulta-clientes.html', 
   styleUrl: './consulta-clientes.scss' // 
 })
