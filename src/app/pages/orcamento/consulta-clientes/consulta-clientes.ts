@@ -17,8 +17,6 @@ export class ConsultaClientes {
   // O EventEmitter<number> indica que ele emitirá um número (o índice do cliente)
   @Output() clienteDeletado = new EventEmitter<number>();
 
-  constructor() { }
-
   // Método para emitir o evento de deleção
   // Ele não deleta diretamente, apenas informa ao pai qual cliente deve ser deletado
   deletarCliente(index: number): void {

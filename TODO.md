@@ -4,5 +4,5 @@
 - [ ] Reactive forms
 - [ ] Routing
 - [ ] Pipes
-- [ ] Input
-- [ ] Output
+- [x] Input
+- [x] Output
