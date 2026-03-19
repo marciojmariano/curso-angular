@@ -1,7 +1,7 @@
 # Conteúdos de Angular
 
 - [x] Template-driven forms
-- [ ] Reactive forms
+- [x] Reactive forms
 - [ ] Routing
 - [ ] Pipes
 - [x] Input
